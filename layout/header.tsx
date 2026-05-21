@@ -6,10 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAV_LINKS, SITE } from "@/data";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -66,12 +68,13 @@ export default function Header() {
             {/* CTA */}
             <div className="hidden md:flex items-center gap-3">
               <Button
+
                 variant="ghost"
                 className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
               >
                 Sign In
               </Button>
-              <Button className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold text-sm px-5 rounded-xl group">
+              <Button onClick={() => navigate.push('/Authentication')} className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold text-sm px-5 rounded-xl group">
                 Get Started Free
                 <ChevronRight className="ml-1 w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Button>
@@ -116,10 +119,10 @@ export default function Header() {
                 </motion.div>
               ))}
               <div className="pt-4 flex flex-col gap-2">
-                <Button variant="ghost" className="w-full text-white/70 justify-start">
+                <Button onClick={() => navigate.push('/Authentication')} variant="ghost" className="w-full text-white/70 justify-start">
                   Sign In
                 </Button>
-                <Button className="w-full bg-[var(--teal)] text-[var(--navy)] font-semibold">
+                <Button onClick={() => navigate.push('/Authentication')} className="w-full bg-[var(--teal)] text-[var(--navy)] font-semibold">
                   Get Started Free
                 </Button>
               </div>

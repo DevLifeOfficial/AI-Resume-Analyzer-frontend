@@ -198,7 +198,7 @@ export default function HeroSection() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white/10 text-white/70 hover:text-white hover:border-white/30 hover:bg-white/5 text-base px-8 py-6 rounded-2xl"
+                  className="border-white/10 bg-transparent text-white hover:border-white/70 hover:bg-white text-base px-8 py-6 rounded-2xl"
                 >
                   Watch Demo
                 </Button>
