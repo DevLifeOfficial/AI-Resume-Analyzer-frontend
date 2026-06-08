@@ -67,8 +67,7 @@ export default function Header() {
 
             {/* CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <Button
-
+              <Button onClick={() => navigate.push('/Authentication')}
                 variant="ghost"
                 className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
               >

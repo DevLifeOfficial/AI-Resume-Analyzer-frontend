@@ -1,39 +1,39 @@
-import { ApolloClient, InMemoryCache, createHttpLink, from, ApolloLink } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  from,
+} from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/graphql';
+const API_URL =
+  (import.meta as any)?.env?.NEXT_PUBLIC_API_URL ||
+  'http://localhost:3000/graphql';
 
-const httpLink = createHttpLink({ uri: API_URL });
-
-// Auth header injection
-const authLink = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem('auth_token');
-  operation.setContext(({ headers = {} }) => ({
-    headers: { ...headers, ...(token ? { Authorization: `Bearer ${token}` } : {}) },
-  }));
-  return forward(operation);
+const httpLink = new HttpLink({
+  uri: API_URL,
+  credentials: 'include',
 });
 
-// Global error handling
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError((error) => {
+  const { graphQLErrors, networkError } = error as any;
+
   if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, extensions }) => {
+    graphQLErrors.forEach(({ message, extensions }: any) => {
       if (extensions?.code === 'UNAUTHENTICATED') {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_user');
         window.location.href = '/login';
       }
+
       console.error(`[GraphQL]: ${message}`);
     });
   }
-  if (networkError) console.error(`[Network]: ${networkError}`);
+
+  if (networkError) {
+    console.error(`[Network]: ${networkError}`);
+  }
 });
 
 export const apolloClient = new ApolloClient({
-  link: from([errorLink, authLink, httpLink]),
+  link: from([errorLink, httpLink]),
   cache: new InMemoryCache(),
-  defaultOptions: {
-    watchQuery: { fetchPolicy: 'cache-and-network' },
-    query: { fetchPolicy: 'network-only' },
-  },
 });
