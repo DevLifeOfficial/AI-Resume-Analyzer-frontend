@@ -4,7 +4,6 @@ import { gql } from '@apollo/client';
 export const REGISTER = gql`
   mutation Register($input: CreateUserInput!) {
     register(input: $input) {
-      token
       user { id email name role }
     }
   }
@@ -13,7 +12,6 @@ export const REGISTER = gql`
 export const LOGIN = gql`
   mutation Login($input: LoginUserInput!) {
     login(input: $input) {
-      token
       user { id email name role }
     }
   }
@@ -39,7 +37,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
-// ── Resume ────────────────────────────────────────
+// ── Resume 
 export const UPLOAD_RESUME = gql`
   mutation UploadResume($createResumeInput: CreateResumeInput!) {
     uploadResume(createResumeInput: $createResumeInput) {

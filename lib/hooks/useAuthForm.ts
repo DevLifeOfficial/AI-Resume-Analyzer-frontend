@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { AuthPageConfig } from "@/lib/config/auth.config";
+import { useMutation } from "@apollo/client/react";
+import { LOGIN, REGISTER } from "@/GraphQL/graphql";
 
 export interface AuthFormData {
   name?: string;
@@ -17,19 +19,12 @@ export function useAuthForm(config: AuthPageConfig) {
       email: "",
       password: "",
     },
-    // Build validation rules from the config field definitions
-    // so auth.config.ts is the single source of truth for validation.
-    // Pass the rules object to each register() call in AuthCard.
     mode: "onBlur",
   });
 
   const [loading, setLoading] = useState(false);
   const [oauthLoading, setOauthLoading] = useState<string | null>(null);
 
-  /**
-   * Returns react-hook-form register options derived from an AuthFieldConfig's
-   * validation spec. This keeps all validation rules co-located with config.
-   */
   function getRegisterOptions(fieldName: string) {
     const fieldConfig = config.fields.find((f) => f.name === fieldName);
     if (!fieldConfig?.validation) return {};
@@ -45,15 +40,20 @@ export function useAuthForm(config: AuthPageConfig) {
   const onSubmit = async (data: AuthFormData) => {
     try {
       setLoading(true);
-      console.log("AUTH SUBMIT:", config.mode, data);
+      console.log("AUTH SUBMIT:", config.mode, data); 
 
-      // TODO: wire up your login/register mutation here
-      // e.g. await signIn("credentials", { ...data, redirect: false })
-      //      or await registerMutation.mutateAsync(data)
+      const [loginMutation] = useMutation(LOGIN);
+      const [registerMutation] = useMutation(REGISTER);
 
-    } catch (error) {
-      console.error("Auth error:", error);
-    } finally {
+      const result = config.mode === "login" ? 
+        await loginMutation({ variables: { input: data } })
+      :  await registerMutation({ variables: { input: data } });
+
+      console.log("Auth result:", result);
+
+      } catch (error) {
+        console.error("Auth error:", error);
+      } finally {
       setLoading(false);
     }
   };

@@ -6,9 +6,8 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
-const API_URL =
-  (import.meta as any)?.env?.NEXT_PUBLIC_API_URL ||
-  'http://localhost:3000/graphql';
+const API_URL = process.env.NEXT_PUBLIC_API_URL ||
+  'http://localhost:3001/graphql';
 
 const httpLink = new HttpLink({
   uri: API_URL,
@@ -21,7 +20,7 @@ const errorLink = onError((error) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, extensions }: any) => {
       if (extensions?.code === 'UNAUTHENTICATED') {
-        window.location.href = '/login';
+        window.location.replace('/login');
       }
 
       console.error(`[GraphQL]: ${message}`);
