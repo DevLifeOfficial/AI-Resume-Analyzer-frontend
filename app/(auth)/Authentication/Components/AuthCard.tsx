@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
 import { useState } from "react";
-import { LinkedInLogoIcon } from "@radix-ui/react-icons";
-
 import type { AuthPageConfig, AuthFieldConfig, OAuthProviderConfig } from "@/lib/config/auth.config";
 import { useAuthForm } from "@/lib/hooks/useAuthForm";
 import { PasswordStrength } from "./PasswordStrength";
@@ -167,11 +165,9 @@ function OAuthButton({
     >
       {loading ? (
         <Loader2 size={16} className="animate-spin" />
-      ) : provider.icon === "Google" ? (
-        <GoogleIcon />
       ) : (
-        <LinkedInLogoIcon className="w-4 h-4 text-[#0A66C2]" />
-      )}
+        <GoogleIcon />
+      ) }
 
       <span className="hidden md:inline">
         {provider.label}
@@ -237,7 +233,7 @@ export function AuthCard({ config }: AuthCardProps) {
       </div>
 
       {/* ── OAuth Buttons ── */}
-      <div className="grid grid-cols-2 gap-4 mb-5">
+      <div className="grid grid-cols-1 gap-4 mb-5">
         {config.oauthProviders.map((provider, i) => (
           <motion.div
             key={provider.id}

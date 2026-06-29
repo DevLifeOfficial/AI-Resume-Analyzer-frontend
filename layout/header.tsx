@@ -3,14 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles, ChevronRight } from "lucide-react";
+import { Menu, X, Sparkles, ChevronRight, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAV_LINKS, SITE } from "@/data";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/context/AuthContext";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
   const navigate = useRouter();
 
   useEffect(() => {
@@ -66,18 +68,28 @@ export default function Header() {
             </nav>
 
             {/* CTA */}
+            {isAuthenticated ? (
             <div className="hidden md:flex items-center gap-3">
               <Button onClick={() => navigate.push('/Authentication')}
                 variant="ghost"
-                className="text-white/70 hover:text-white hover:bg-white/10 text-sm"
+                className="text-white/70 hover:text-white hover:bg-white/10 text-sm cursor-pointer"
               >
                 Sign In
               </Button>
-              <Button onClick={() => navigate.push('/Authentication')} className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold text-sm px-5 rounded-xl group">
+              <Button onClick={() => navigate.push('/Authentication')} className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold text-sm px-5 rounded-xl group cursor-pointer">
                 Get Started Free
                 <ChevronRight className="ml-1 w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Button>
-            </div>
+            </div> ) : (
+            <div className="hidden md:flex items-center gap-3">
+              <Button onClick={() => navigate.push('/Authentication')}
+                variant="ghost"
+                className="text-red-500 bg-white font-medium hover:bg-white/70 text-sm cursor-pointer"
+              >
+               <LogOut className="w-4 h-4" /> Logout
+              </Button>
+            </div> 
+            )}
 
             {/* Mobile toggle */}
             <button

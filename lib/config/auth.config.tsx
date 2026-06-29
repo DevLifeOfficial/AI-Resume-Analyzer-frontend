@@ -97,12 +97,6 @@ export const LOGIN_CONFIG: AuthPageConfig = {
       icon: "Google",
       hoverClass: "hover:bg-white/8",
     },
-    {
-      id: "linkedin",
-      label: "LinkedIn",
-      icon: "LinkedIn",
-      hoverClass: "hover:bg-[#0A66C2]/10",
-    },
   ],
 };
 
@@ -177,11 +171,6 @@ export const REGISTER_CONFIG: AuthPageConfig = {
       icon: "Google",
       hoverClass: "hover:bg-white/8",
     },
-    {
-      id: "linkedin",
-      label: "LinkedIn",
-      icon: "LinkedIn",
-      hoverClass: "hover:bg-[#0A66C2]/10",
-    },
   ],
 };
+
