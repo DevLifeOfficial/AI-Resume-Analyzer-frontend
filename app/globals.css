@@ -1,13 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 
 @import "tailwindcss";
-
 @import "tw-animate-css";
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 96ec2404717f12a0aff4e50b8628585175f63076
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
