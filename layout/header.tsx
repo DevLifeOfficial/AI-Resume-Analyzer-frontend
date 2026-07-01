@@ -12,8 +12,15 @@ import { useAuth } from "@/lib/context/AuthContext";
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const navigate = useRouter();
+
+    const handleLogout = () => {
+    // Clear the authentication state
+    logout();
+    // navigate.push('/Authentication')
+  }
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -68,7 +75,7 @@ export default function Header() {
             </nav>
 
             {/* CTA */}
-            {isAuthenticated ? (
+            {!isAuthenticated ? (
             <div className="hidden md:flex items-center gap-3">
               <Button onClick={() => navigate.push('/Authentication')}
                 variant="ghost"
@@ -82,7 +89,7 @@ export default function Header() {
               </Button>
             </div> ) : (
             <div className="hidden md:flex items-center gap-3">
-              <Button onClick={() => navigate.push('/Authentication')}
+              <Button onClick={handleLogout}
                 variant="ghost"
                 className="text-red-500 bg-white font-medium hover:bg-white/70 text-sm cursor-pointer"
               >

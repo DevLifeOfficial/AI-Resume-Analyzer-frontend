@@ -8,7 +8,7 @@ import React, {
   ReactNode,
 } from "react";
 
-import { GET_CURRENT_USER } from "@/GraphQL/graphql";
+import { GET_CURRENT_USER, LOGOUT_MUTATION } from "@/GraphQL/graphql";
 import { apolloClient } from "@/GraphQL/apollo";
 
 interface User {
@@ -58,7 +58,11 @@ export function AuthProvider({
           fetchPolicy: "network-only",
         });
 
-      setUser(data?.getCurrentUser ?? null);
+      if (data?.getCurrentUser) {
+        setUser(data.getCurrentUser);
+      } else {
+        setUser(null);
+      }
     } catch (err) {
       setUser(null);
     } finally {
@@ -69,7 +73,9 @@ export function AuthProvider({
   const logout = async () => {
     try {
       // Call your logout mutation here later
-
+      await apolloClient.mutate({
+        mutation: LOGOUT_MUTATION,
+      });
       setUser(null);
     } catch (error) {
       console.error(error);

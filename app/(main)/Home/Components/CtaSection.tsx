@@ -3,8 +3,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/lib/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function CtaSection() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+  
   return (
     <section className="bg-[var(--navy)] py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +71,13 @@ export default function CtaSection() {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-10 py-6 rounded-2xl btn-glow group animate-pulse-ring">
+              <Button onClick={()=>{
+                  if (isAuthenticated) {
+                    router.push("/Analyzer");
+                  }else {
+                    router.push("/Authentication");
+                  }
+              }}  className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-10 py-6 rounded-2xl btn-glow group animate-pulse-ring">
                 Analyze My Resume — Free
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>

@@ -17,6 +17,12 @@ export const LOGIN = gql`
   }
 `;
 
+export const LOGOUT_MUTATION = gql`
+  mutation Logout {
+    logout
+  }
+`;
+
 // ── User
 export const GET_CURRENT_USER = gql`
   query GetCurrentUser {
@@ -46,6 +52,7 @@ export const UPLOAD_RESUME = gql`
     }
   }
 `;
+
 
 export const ANALYZE_RESUME = gql`
   mutation AnalyzeResume($analyzeResumeInput: AnalyzeResumeInput!) {

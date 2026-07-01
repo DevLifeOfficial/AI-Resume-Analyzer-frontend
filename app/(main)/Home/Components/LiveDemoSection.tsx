@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Upload, FileText, Zap, CheckCircle, AlertCircle, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/lib/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const MOCK_KEYWORDS_FOUND = ["Python", "Machine Learning", "SQL", "Data Analysis", "Pandas"];
 const MOCK_KEYWORDS_MISSING = ["TensorFlow", "Spark", "Kubernetes", "dbt", "Airflow"];
@@ -18,6 +20,8 @@ const MOCK_SUGGESTIONS = [
 export default function LiveDemoSection() {
   const [phase, setPhase] = useState<"idle" | "analyzing" | "done">("idle");
   const [progress, setProgress] = useState(0);
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
 
   const handleAnalyze = () => {
     setPhase("analyzing");
@@ -108,7 +112,15 @@ export default function LiveDemoSection() {
             </div>
 
             <Button
-              onClick={phase === "done" ? reset : handleAnalyze}
+              onClick={phase === "done" ? () => {
+               
+                  if (isAuthenticated) { 
+                    reset()
+                    router.replace("/Analyzer");
+                  }else {
+                    router.push("/Authentication");
+                  }
+                } : () => handleAnalyze()}
               disabled={phase === "analyzing"}
               className="w-full bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold py-6 rounded-2xl text-base btn-glow disabled:opacity-60"
             >

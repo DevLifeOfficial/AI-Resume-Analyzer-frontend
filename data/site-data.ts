@@ -24,7 +24,7 @@ export const HERO = {
   subheadline: "all with AI",
   body: "Upload your resume. Paste a job description. Our AI gives you a score, highlights gaps, rewrites bullets, and helps you beat applicant tracking systems in seconds.",
   cta: "Analyze My Resume — Free",
-  ctaSub: "No sign-up required · Results in 8 seconds",
+  ctaSub: "sign-up required · Results in 8 seconds",
   image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&q=80",
 };
 
@@ -250,4 +250,30 @@ export const TRUSTED_LOGOS = [
   { name: "Stripe", color: "#635BFF" },
   { name: "Figma", color: "#F24E1E" },
   { name: "Notion", color: "#000000" },
+];
+
+
+export const PROFESSIONS = [
+  "Software Engineer",
+  "Data Scientist",
+  "Product Manager",
+  "Designer",
+  "Marketing",
+  "Sales",
+  "Finance",
+  "Other",
+];
+
+export const EXPERIENCE_LEVELS = [
+  { value: "entry", label: "Entry Level (0–2 yrs)" },
+  { value: "mid", label: "Mid Level (3–5 yrs)" },
+  { value: "senior", label: "Senior (6–9 yrs)" },
+  { value: "lead", label: "Lead / Principal (10+ yrs)" },
+];
+
+export const FOCUS_OPTIONS = [
+  { value: "general", label: "General ATS Optimization" },
+  { value: "tailor", label: "Tailor to a Specific Job" },
+  { value: "pivot", label: "Career Change / Pivot" },
+  { value: "exec", label: "Executive / Leadership Review" },
 ];

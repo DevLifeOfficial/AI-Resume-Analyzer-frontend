@@ -49,9 +49,7 @@ export function useAuthForm(config: AuthPageConfig) {
   const onSubmit = async (data: AuthFormData) => {
     try {
       setLoading(true);
-
-      console.log("AUTH SUBMIT:", config.mode, data);
-
+      
       const result =
         config.mode === "login"
           ? await loginMutation({
@@ -73,8 +71,8 @@ export function useAuthForm(config: AuthPageConfig) {
             });
 
       if (!result.data) return;
-      refreshUser(); // Refresh the user context after successful login or registration
-      router.push(config.mode === "login" ? "/Home" : "/Authentication");
+      refreshUser();
+      router.replace(config.mode === "login" ? "/Home" : "/Authentication");
     } catch (error: any) {
       console.error("Authentication failed:", error.message);
     } finally {

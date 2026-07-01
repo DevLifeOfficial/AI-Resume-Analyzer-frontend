@@ -6,6 +6,8 @@ import { ArrowRight, Zap, Shield, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { HERO, STATS } from "@/data";
+import { useAuth } from "@/lib/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const floatVariants = {
   initial: { opacity: 0, y: 20 },
@@ -116,12 +118,15 @@ function KeywordMock() {
 
 export default function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
 
   return (
     <section
@@ -192,7 +197,13 @@ export default function HeroSection() {
                 animate="animate"
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Button className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-8 py-6 rounded-2xl btn-glow group">
+                <Button onClick={() => {
+                  if (isAuthenticated) {
+                    router.push("/Analyzer");
+                  }else {
+                    router.push("/Authentication");
+                  }
+                }} className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-8 py-6 rounded-2xl btn-glow group">
                   {HERO.cta}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>

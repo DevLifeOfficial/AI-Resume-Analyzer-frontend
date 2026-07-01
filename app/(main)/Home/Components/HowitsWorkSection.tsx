@@ -5,12 +5,15 @@ import { useRef } from "react";
 import { HOW_IT_WORKS } from "@/data";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/context/AuthContext";
 
 export default function HowItWorksSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const { isAuthenticated } = useAuth();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.8], ["0%", "100%"]);
-
+  const router = useRouter();
   return (
     <section id="how-it-works" className="bg-[var(--navy)] py-24 overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,7 +106,13 @@ export default function HowItWorksSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-16"
         >
-          <Button className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-10 py-6 rounded-2xl btn-glow group">
+          <Button onClick={()=>{
+              if (isAuthenticated) {
+                    router.push("/Analyzer");
+                  }else {
+                    router.push("/Authentication");
+                  }
+          }} className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-10 py-6 rounded-2xl btn-glow group">
             Start Your Free Analysis
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>

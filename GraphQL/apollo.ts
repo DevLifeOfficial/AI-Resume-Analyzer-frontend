@@ -7,7 +7,7 @@ import {
 import { onError } from '@apollo/client/link/error';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:3001/graphql';
+  'http://localhost:5000/graphql';
 
 const httpLink = new HttpLink({
   uri: API_URL,
