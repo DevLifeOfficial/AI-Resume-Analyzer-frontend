@@ -4,6 +4,10 @@
 
 @import "tw-animate-css";
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 96ec2404717f12a0aff4e50b8628585175f63076
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
