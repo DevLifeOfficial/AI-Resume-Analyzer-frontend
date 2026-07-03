@@ -4,7 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Mail, CheckCircle } from "lucide-react";
-import { LinkedInLogoIcon, GitHubLogoIcon, TwitterLogoIcon, } from "@radix-ui/react-icons";
+import {
+  LinkedInLogoIcon,
+  GitHubLogoIcon,
+  TwitterLogoIcon,
+} from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SITE, FOOTER_LINKS } from "@/data";
@@ -30,11 +34,13 @@ export default function Footer() {
             {/* Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-[var(--teal)]/10 blur-3xl rounded-full pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
               <div className="text-center md:text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(5,200,200,0.1)] border border-[rgba(5,200,200,0.2)] mb-4">
                   <Mail className="w-3.5 h-3.5 text-[var(--teal)]" />
-                  <span className="text-xs font-medium text-[var(--teal)]">Career Intelligence Newsletter</span>
+                  <span className="text-xs font-medium text-[var(--teal)]">
+                    Career Intelligence Newsletter
+                  </span>
                 </div>
                 <h3
                   className="text-2xl md:text-3xl font-bold text-white mb-2"
@@ -43,12 +49,13 @@ export default function Footer() {
                   Level up your job search
                 </h3>
                 <p className="text-white/50 text-sm max-w-md">
-                  Weekly AI tips, resume templates, insider hiring intel, and early access to new features.
-                  Join 40,000+ ambitious job seekers.
+                  Weekly AI tips, resume templates, insider hiring intel, and
+                  early access to new features. Join 40,000+ ambitious job
+                  seekers.
                 </p>
               </div>
 
-              <div className="w-full md:w-auto min-w-[340px]">
+              <div className="w-full lg:max-w-md lg:min-w-[420px]">
                 {subscribed ? (
                   <motion.div
                     initial={{ scale: 0.9, opacity: 0 }}
@@ -57,32 +64,39 @@ export default function Footer() {
                   >
                     <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                     <div>
-                      <p className="text-white font-medium text-sm">You're in!</p>
-                      <p className="text-white/50 text-xs">Check your inbox for a welcome gift 🎁</p>
+                      <p className="text-white font-medium text-sm">
+                        You're in!
+                      </p>
+                      <p className="text-white/50 text-xs">
+                        Check your inbox for a welcome gift 🎁
+                      </p>
                     </div>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubscribe} className="flex gap-2">
+                  <form
+                    onSubmit={handleSubscribe}
+                    className="flex w-full flex-col sm:flex-row gap-3"
+                  >
                     <Input
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[var(--teal)] focus:ring-[var(--teal)]/20 rounded-xl flex-1"
+                      className="h-12 flex-1 rounded-xl bg-white/5 border-white/10 text-white placeholder:text-white/40"
                     />
                     <Button
                       type="submit"
-                      className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold rounded-xl px-5 whitespace-nowrap group"
+                      className="h-12 px-6 rounded-xl bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold whitespace-nowrap"
                     >
                       Subscribe
-                      <ArrowRight className="ml-1.5 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                      <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </form>
                 )}
-                <p className="text-white/30 text-xs mt-2 text-center">
-                  No spam, ever. Unsubscribe anytime.
-                </p>
+             <p className="mt-3 text-center text-xs text-white/30">
+  No spam. Unsubscribe anytime.
+</p>
               </div>
             </div>
           </div>
@@ -91,15 +105,21 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10">
           {/* Brand */}
-          <div className="col-span-2">
+         <div className="lg:col-span-2 flex flex-col items-center text-center lg:items-start lg:text-left">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-(--teal) flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-(--navy)" />
-              </div>
-              <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
-                Resume<span className="text-(--teal)">AI</span>
+              <img
+                src="/logo.jpg"
+                alt="ResumeAI Logo"
+                className="w-8 h-8 rounded-full group-hover:scale-105 transition-transform"
+              />
+              <span
+                className="text-xl font-bold text-white"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Resume
+                <span className="text-(--teal)">AI</span>
               </span>
             </Link>
             <p className="text-white/40 text-sm leading-relaxed mb-6 max-w-xs">

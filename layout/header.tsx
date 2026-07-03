@@ -44,15 +44,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative w-8 h-8 rounded-lg bg-[var(--teal)] flex items-center justify-center overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 bg-white/20"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  style={{ borderRadius: "40%" }}
-                />
-                <Sparkles className="w-4 h-4 text-[var(--navy)] relative z-10" />
-              </div>
+              <img src="/logo.jpg" alt="ResumeAI Logo" className="w-8 h-8 rounded-full group-hover:scale-105 transition-transform" />
               <span
                 className="text-xl font-bold text-white"
                 style={{ fontFamily: "var(--font-display)" }}

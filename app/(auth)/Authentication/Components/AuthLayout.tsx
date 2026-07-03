@@ -16,6 +16,16 @@ export function AuthLayout({ config, children }: AuthLayoutProps) {
     <div className="relative h-screen flex overflow-hidden">
       <AuthBackground />
 
+       <Link href="/" className="absolute left-1/3 top-1/3 flex flex-col items-center gap-2.5 w-fit">
+        <img src="/logo.jpg" alt="ResumeAI Logo" className="w-40 h-40 rounded-full group-hover:scale-105 transition-transform" />
+          <span
+            className="text-5xl font-bold text-white"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Resume<span className="text-[var(--teal)]">AI</span>
+          </span>
+        </Link>
+
       {/* ── Left decorative panel (lg+) ── */}
       <motion.div
         initial={{ opacity: 0, x: -32 }}
@@ -25,9 +35,7 @@ export function AuthLayout({ config, children }: AuthLayoutProps) {
       >
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center gap-2.5 w-fit">
-          <div className="w-9 h-9 rounded-xl bg-[var(--teal)] flex items-center justify-center shadow-[0_0_20px_rgba(5,200,200,0.35)]">
-            <Sparkles className="w-4 h-4 text-[var(--navy)]" />
-          </div>
+        <img src="/logo.jpg" alt="ResumeAI Logo" className="w-8 h-8 rounded-full group-hover:scale-105 transition-transform" />
           <span
             className="text-xl font-bold text-white"
             style={{ fontFamily: "var(--font-display)" }}

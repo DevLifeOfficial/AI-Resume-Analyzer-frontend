@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 export default function CtaSection() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  
+
   return (
     <section className="bg-[var(--navy)] py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,13 +23,13 @@ export default function CtaSection() {
           {/* Background layers */}
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--navy-light)] via-[var(--navy-mid)] to-[var(--navy)]" />
           <div className="absolute inset-0 hero-mesh opacity-60" />
-          <div className="absolute inset-0 border border-[rgba(5,200,200,0.15)] rounded-[2.5rem]" />
+          <div className="absolute inset-0 border border-[rgba(5,200,200,0.15)] rounded-[1rem] md:rounded-[2.5rem]" />
 
           {/* Glow orbs */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--teal)]/8 blur-[80px] rounded-full pointer-events-none" />
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-[var(--teal)] to-transparent opacity-40" />
 
-          <div className="relative z-10 py-20 px-8 md:px-16">
+          <div className="relative z-10 py-10 lg:py-20 px-4 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function CtaSection() {
                   }else {
                     router.push("/Authentication");
                   }
-              }}  className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-10 py-6 rounded-2xl btn-glow group animate-pulse-ring">
+              }}  className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-bold text-base px-4 lg:px-10 py-6 rounded-2xl btn-glow group animate-pulse-ring">
                 Analyze My Resume — Free
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
