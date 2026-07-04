@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { Check, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { PRICING } from "@/data";
+import { useRouter } from "next/navigation";
 
 export default function PricingSection() {
+  const router = useRouter();
   return (
     <section id="pricing" className="bg-[var(--navy-mid)] py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,7 +100,9 @@ export default function PricingSection() {
               </div>
 
               <div className="p-8 pt-0">
-                <Button
+                <Button onClick={() => router.push(`/Payment?plan=${plan.name.toLowerCase()}`)}
+                  variant={plan.highlight ? "default" : "outline"}
+                  size="lg"
                   className={`w-full py-5 rounded-2xl font-bold text-sm ${
                     plan.highlight
                       ? "bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] btn-glow"

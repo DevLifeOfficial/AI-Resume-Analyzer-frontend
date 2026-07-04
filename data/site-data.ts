@@ -1,5 +1,7 @@
 // ─── Central data store 
 
+import { Sparkles, Target, Users } from "lucide-react";
+
 export const SITE = {
   name: "ResumeAI",
   tagline: "Land your dream job — intelligently.",
@@ -276,4 +278,46 @@ export const FOCUS_OPTIONS = [
   { value: "tailor", label: "Tailor to a Specific Job" },
   { value: "pivot", label: "Career Change / Pivot" },
   { value: "exec", label: "Executive / Leadership Review" },
+];
+
+
+// Plan Details
+export const PLAN_DETAILS: Record<string, { name: string; price: string; features: string[] }> = {
+  starter: {
+    name: "Starter",
+    price: "$0",
+    features: ["3 resume analyses / month", "Basic ATS scoring", "Email support"],
+  },
+  pro: {
+    name: "Pro",
+    price: "$19/mo",
+    features: ["Unlimited analyses", "Job-description matching", "Priority AI processing", "Downloadable reports"],
+  },
+  team: {
+    name: "Team",
+    price: "$49/mo",
+    features: ["Everything in Pro", "5 team seats", "Shared analysis history", "Priority support"],
+  },
+};
+
+export const COUNTRIES = ["United States", "India", "United Kingdom", "Canada", "Australia", "Germany", "Other"];
+export const BRAND_LABEL: Record<string, string> = {
+  visa: "Visa",
+  mastercard: "Mastercard",
+  amex: "Amex",
+  discover: "Discover",
+};
+
+// Watch Demo Page Data
+export const CHAPTERS = [
+  { time: "0:00", label: "Uploading a resume and picking a target role" },
+  { time: "0:45", label: "Reading the ATS score and identified skills" },
+  { time: "1:30", label: "Applying suggested fixes and re-analyzing" },
+  { time: "2:15", label: "Comparing results against a real job description" },
+];
+
+export const HIGHLIGHTS = [
+  { icon: Target, title: "Role-aware scoring", text: "The score adjusts to the target role and experience level you select — not a generic checklist." },
+  { icon: Sparkles, title: "AI-generated fixes", text: "Suggestions come from the same model reviewers use, phrased as concrete edits you can make today." },
+  { icon: Users, title: "Built for real pipelines", text: "Designed around how ATS systems actually parse resumes, not just keyword stuffing." },
 ];

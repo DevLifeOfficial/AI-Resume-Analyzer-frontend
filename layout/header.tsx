@@ -15,12 +15,10 @@ export default function Header() {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useRouter();
 
-    const handleLogout = () => {
-    // Clear the authentication state
+  const handleLogout = () => {
     logout();
-    // navigate.push('/Authentication')
-  }
-
+    navigate.push("/Authentication");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -44,7 +42,11 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <img src="/logo.jpg" alt="ResumeAI Logo" className="w-8 h-8 rounded-full group-hover:scale-105 transition-transform" />
+              <img
+                src="/logo.jpg"
+                alt="ResumeAI Logo"
+                className="w-8 h-8 rounded-full group-hover:scale-105 transition-transform"
+              />
               <span
                 className="text-xl font-bold text-white"
                 style={{ fontFamily: "var(--font-display)" }}
@@ -58,7 +60,7 @@ export default function Header() {
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
-                  href={link.href}
+                  href={`/Home${link.href}`}
                   className="px-4 py-2 text-sm font-medium text-white/60 hover:text-[var(--teal)] transition-colors duration-200 rounded-lg hover:bg-white/5"
                 >
                   {link.label}
@@ -68,26 +70,32 @@ export default function Header() {
 
             {/* CTA */}
             {!isAuthenticated ? (
-            <div className="hidden md:flex items-center gap-3">
-              <Button onClick={() => navigate.push('/Authentication')}
-                variant="ghost"
-                className="text-white/70 hover:text-white hover:bg-white/10 text-sm cursor-pointer"
-              >
-                Sign In
-              </Button>
-              <Button onClick={() => navigate.push('/Authentication')} className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold text-sm px-5 rounded-xl group cursor-pointer">
-                Get Started Free
-                <ChevronRight className="ml-1 w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </Button>
-            </div> ) : (
-            <div className="hidden md:flex items-center gap-3">
-              <Button onClick={handleLogout}
-                variant="ghost"
-                className="text-red-500 bg-white font-medium hover:bg-white/70 text-sm cursor-pointer"
-              >
-               <LogOut className="w-4 h-4" /> Logout
-              </Button>
-            </div> 
+              <div className="hidden md:flex items-center gap-3">
+                <Button
+                  onClick={() => navigate.push("/Authentication")}
+                  variant="ghost"
+                  className="text-white/70 hover:text-white hover:bg-white/10 text-sm cursor-pointer"
+                >
+                  Sign In
+                </Button>
+                <Button
+                  onClick={() => navigate.push("/Authentication")}
+                  className="bg-[var(--teal)] hover:bg-[var(--teal-dim)] text-[var(--navy)] font-semibold text-sm px-5 rounded-xl group cursor-pointer"
+                >
+                  Get Started Free
+                  <ChevronRight className="ml-1 w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </Button>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-3">
+                <Button
+                  onClick={handleLogout}
+                  variant="ghost"
+                  className="text-red-500 bg-white font-medium hover:bg-white/70 text-sm cursor-pointer"
+                >
+                  <LogOut className="w-4 h-4" /> Logout
+                </Button>
+              </div>
             )}
 
             {/* Mobile toggle */}
@@ -129,10 +137,17 @@ export default function Header() {
                 </motion.div>
               ))}
               <div className="pt-4 flex flex-col gap-2">
-                <Button onClick={() => navigate.push('/Authentication')} variant="ghost" className="w-full text-white/70 justify-start">
+                <Button
+                  onClick={() => navigate.push("/Authentication")}
+                  variant="ghost"
+                  className="w-full text-white/70 justify-start"
+                >
                   Sign In
                 </Button>
-                <Button onClick={() => navigate.push('/Authentication')} className="w-full bg-[var(--teal)] text-[var(--navy)] font-semibold">
+                <Button
+                  onClick={() => navigate.push("/Authentication")}
+                  className="w-full bg-[var(--teal)] text-[var(--navy)] font-semibold"
+                >
                   Get Started Free
                 </Button>
               </div>

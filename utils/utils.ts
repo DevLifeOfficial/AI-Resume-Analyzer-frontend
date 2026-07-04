@@ -46,3 +46,18 @@ export function truncate(str: string, max = 28): string {
 export function fileExt(name: string): string {
   return name.split('.').pop()?.toUpperCase() ?? 'FILE';
 }
+
+
+export function formatCardNumber(value: string) {
+  return value
+    .replace(/\D/g, "")
+    .slice(0, 16)
+    .replace(/(.{4})/g, "$1 ")
+    .trim();
+}
+
+export function formatExpiry(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 4);
+  if (digits.length < 3) return digits;
+  return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+}

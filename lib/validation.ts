@@ -82,3 +82,77 @@ export function validateResumeFile(file: File): string | null {
 export function sanitize(str: string): string {
   return str.replace(/[<>"'`]/g, '');
 }
+
+export interface BookDemoFormValues {
+  name: string;
+  email: string;
+  company: string;
+  teamSize: string;
+  preferredDate: string;
+  notes: string;
+}
+
+export const initialValues: BookDemoFormValues = {
+  name: "",
+  email: "",
+  company: "",
+  teamSize: "",
+  preferredDate: "",
+  notes: "",
+};
+
+// Book Demo Form
+export function Bookvalidate(values: BookDemoFormValues) {
+  const errors: Partial<Record<keyof BookDemoFormValues, string>> = {};
+
+  if (!values.name.trim()) errors.name = "Name is required.";
+  if (!values.email.trim()) {
+    errors.email = "Email is required.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    errors.email = "Enter a valid email address.";
+  }
+  if (!values.company.trim()) errors.company = "Company name is required.";
+  if (!values.preferredDate) errors.preferredDate = "Pick a preferred date.";
+
+  return errors;
+}
+
+
+// Payment Form
+
+export interface CardFormErrors {
+  name?: string;
+  email?: string;
+  cardNumber?: string;
+  expiry?: string;
+  cvv?: string;
+  zip?: string;
+}
+
+export function CardValidate(values: {
+  name: string;
+  email: string;
+  cardNumber: string;
+  expiry: string;
+  cvv: string;
+  zip: string;
+}): CardFormErrors {
+  const errors: CardFormErrors = {};
+  if (!values.name.trim()) errors.name = "Name on card is required.";
+  if (!values.email.trim()) {
+    errors.email = "Email is required for your receipt.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+    errors.email = "Enter a valid email address.";
+  }
+  const digits = values.cardNumber.replace(/\s/g, "");
+  if (digits.length !== 16) errors.cardNumber = "Card number must be 16 digits.";
+  if (values.expiry.length !== 5) {
+    errors.expiry = "Use MM/YY format.";
+  } else {
+    const mm = Number(values.expiry.split("/")[0]);
+    if (!mm || mm < 1 || mm > 12) errors.expiry = "Invalid month.";
+  }
+  if (values.cvv.length < 3) errors.cvv = "CVV must be 3–4 digits.";
+  if (!values.zip.trim()) errors.zip = "Postal code is required.";
+  return errors;
+}

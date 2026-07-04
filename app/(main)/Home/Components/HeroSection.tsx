@@ -207,7 +207,7 @@ export default function HeroSection() {
                   {HERO.cta}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button
+                <Button onClick={()=> router.push('/WatchDemo')}
                   variant="outline"
                   className="border-white/10 bg-transparent text-white hover:border-white/70 hover:bg-white text-base px-8 py-6 rounded-2xl"
                 >

@@ -24,6 +24,7 @@ interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
+  error: Error | null;
   refreshUser: () => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -33,6 +34,7 @@ export const AuthContext =
     user: null,
     isAuthenticated: false,
     loading: true,
+    error: null,
     refreshUser: async () => {},
     logout: async () => {},
   });
@@ -44,6 +46,8 @@ export function AuthProvider({
 }) {
   const [user, setUser] =
     useState<User | null>(null);
+  const [error, setError] =
+    useState<Error | null>(null);
 
   const [loading, setLoading] =
     useState(true);
@@ -61,10 +65,11 @@ export function AuthProvider({
       if (data?.getCurrentUser) {
         setUser(data.getCurrentUser);
       } else {
-        setUser(null);
+        setUser(null);   setError(null);
       }
     } catch (err) {
       setUser(null);
+      setError(err as Error);
     } finally {
       setLoading(false);
     }
@@ -72,12 +77,13 @@ export function AuthProvider({
 
   const logout = async () => {
     try {
-      // Call your logout mutation here later
       await apolloClient.mutate({
         mutation: LOGOUT_MUTATION,
       });
       setUser(null);
+      setError(null);
     } catch (error) {
+      setError(error as Error);
       console.error(error);
     }
   };
@@ -91,6 +97,7 @@ export function AuthProvider({
       value={{
         user,
         loading,
+        error,
         isAuthenticated: !!user,
         refreshUser,
         logout,
