@@ -10,18 +10,10 @@ import React, {
 
 import { GET_CURRENT_USER, LOGOUT_MUTATION } from "@/GraphQL/graphql";
 import { apolloClient } from "@/GraphQL/apollo";
-
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  avatarUrl?: string;
-  role: string;
-  plan: string;
-}
+import type { ProfileUser } from "@/lib/types/profile.type";
 
 interface AuthContextType {
-  user: User | null;
+  user: ProfileUser | null;
   isAuthenticated: boolean;
   loading: boolean;
   error: Error | null;
@@ -29,43 +21,37 @@ interface AuthContextType {
   logout: () => Promise<void>;
 }
 
-export const AuthContext =
-  createContext<AuthContextType>({
-    user: null,
-    isAuthenticated: false,
-    loading: true,
-    error: null,
-    refreshUser: async () => {},
-    logout: async () => {},
-  });
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  isAuthenticated: false,
+  loading: true,
+  error: null,
+  refreshUser: async () => {},
+  logout: async () => {},
+});
 
-export function AuthProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const [user, setUser] =
-    useState<User | null>(null);
-  const [error, setError] =
-    useState<Error | null>(null);
-
-  const [loading, setLoading] =
-    useState(true);
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<ProfileUser | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const refreshUser = async () => {
     try {
       setLoading(true);
 
-      const { data } =
-        await apolloClient.query<{ getCurrentUser: User }>({
-          query: GET_CURRENT_USER,
-          fetchPolicy: "network-only",
-        });
+      const { data } = await apolloClient.query<{
+        getCurrentUser: ProfileUser;
+      }>({
+        query: GET_CURRENT_USER,
+        fetchPolicy: "network-only",
+      });
 
       if (data?.getCurrentUser) {
         setUser(data.getCurrentUser);
+        setError(null);
       } else {
-        setUser(null);   setError(null);
+        setUser(null);
+        setError(null);
       }
     } catch (err) {
       setUser(null);
@@ -93,7 +79,7 @@ export function AuthProvider({
   }, []);
 
   return (
-     <AuthContext.Provider
+    <AuthContext.Provider
       value={{
         user,
         loading,
