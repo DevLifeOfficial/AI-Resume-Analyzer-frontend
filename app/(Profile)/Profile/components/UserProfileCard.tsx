@@ -41,7 +41,7 @@ export function UserProfileCard() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="bg-[var(--navy-light)] border border-white/5 rounded-3xl p-6 flex items-center gap-4"
+      className="bg-(--cream) border border-white/5 rounded-3xl p-6 flex items-center gap-4"
     >
       {user.avatarUrl ? (
         // eslint-disable-next-line @next/next/no-img-element

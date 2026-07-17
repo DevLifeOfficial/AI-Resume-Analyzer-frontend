@@ -19,8 +19,10 @@
     --primary: 187 96% 40%;        /* electric teal */
     --primary-foreground: 222 47% 8%;
 
-    --secondary: 222 47% 11%;      /* deep navy */
-    --secondary-foreground: 187 96% 85%;
+    /* Secondary softened: was solid navy, read as a second primary button.
+       Now a light teal-tinted neutral so it visibly recedes behind --primary. */
+    --secondary: 187 30% 94%;
+    --secondary-foreground: 222 47% 11%;
 
     --muted: 220 14% 92%;
     --muted-foreground: 220 9% 46%;
@@ -37,16 +39,39 @@
 
     --radius: 0.625rem;
 
+    /* Chart + sidebar tokens (merged in, no longer duplicated below) */
+    --chart-1: 187 96% 40%;
+    --chart-2: 222 47% 11%;
+    --chart-3: 40 90% 55%;
+    --chart-4: 210 40% 60%;
+    --chart-5: 222 20% 70%;
+
+    --sidebar: 222 47% 11%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 187 96% 40%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 187 96% 40%;
+    --sidebar-accent-foreground: 222 47% 8%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 187 96% 40%;
+
     /* Custom tokens */
     --teal: #05c8c8;
     --teal-dim: #048a8a;
     --navy: #0d1b2e;
     --navy-mid: #162236;
     --navy-light: #1e2f47;
+
+    /* Cream is now the single off-white — background aliases it so there's
+       only one "warm neutral" in the system instead of two competing ones. */
     --cream: #f5f4f0;
+
+    /* Gold: reserved for highlight/rank/featured accents (e.g. "top match" tag).
+       Warning: nudged off gold's hue so the two are visually distinct
+       and don't get swapped by accident. */
     --gold: #f0b429;
     --success: #22c55e;
-    --warning: #f59e0b;
+    --warning: #eab308;
 
     --font-display: 'Syne', sans-serif;
     --font-body: 'DM Sans', sans-serif;
@@ -76,6 +101,21 @@
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 187 96% 40%;
+
+    --chart-1: 187 96% 40%;
+    --chart-2: 210 40% 80%;
+    --chart-3: 40 90% 60%;
+    --chart-4: 210 40% 55%;
+    --chart-5: 222 20% 45%;
+
+    --sidebar: 222 47% 5%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 187 96% 40%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 187 96% 40%;
   }
   * {
     @apply border-border outline-ring/50;
@@ -243,6 +283,14 @@
     border: 1px solid rgba(5, 200, 200, 0.2);
   }
 
+  /* ── Highlight / rank pill (uses gold, distinct from warning) ── */
+  .tag-pill-gold {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    background: rgba(240, 180, 41, 0.12);
+    color: var(--gold);
+    border: 1px solid rgba(240, 180, 41, 0.25);
+  }
+
   /* ── Form field ── */
   .field-label {
     @apply block text-sm font-medium mb-1.5;
@@ -260,6 +308,7 @@
   .bg-navy-mid  { background-color: var(--navy-mid); }
   .bg-navy-light { background-color: var(--navy-light); }
   .border-teal  { border-color: var(--teal); }
+  .text-gold    { color: var(--gold); }
 
   .transition-smooth { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 }
@@ -336,73 +385,4 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }

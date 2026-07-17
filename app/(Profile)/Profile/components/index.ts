@@ -8,3 +8,6 @@ export * from "./TagInput";
 export * from "./SectionCard";
 export * from "./EntryFormDialog";
 export * from "./UserProfileCard";
+export * from "./ProfileSidebar";
+export * from "./Resumesection";
+export * from "./Settingsection";
