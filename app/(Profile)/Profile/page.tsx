@@ -64,7 +64,7 @@ export default function ProfilePage() {
 
       {/* Main */}
       <main id="main-scroll" className="flex-1 overflow-y-auto min-w-0">
-        <div className="max-w-[1200px] mx-auto px-6 py-6">
+        <div className="mx-auto px-6 py-6">
           <Hero user={user} />
 
           <div className="flex gap-5 mt-5">

@@ -30,11 +30,17 @@ export function useProfileValidation() {
     });
 
     // Cross-field validation (e.g. startDate and endDate chronological check)
-    const startDate = values.startDate;
-    const endDate = values.endDate;
-    const isCurrent = values.isCurrent;
+    const startDate = values.startDate as string | number | Date | undefined;
+    const endDate = values.endDate as string | number | Date | undefined;
+    const isCurrent = values.isCurrent as boolean | undefined;
 
-    if (startDate && endDate && !isCurrent) {
+    if (
+      startDate &&
+      endDate &&
+      !isCurrent &&
+      (typeof startDate === "string" || typeof startDate === "number" || startDate instanceof Date) &&
+      (typeof endDate === "string" || typeof endDate === "number" || endDate instanceof Date)
+    ) {
       const start = new Date(startDate);
       const end = new Date(endDate);
       if (start > end) {

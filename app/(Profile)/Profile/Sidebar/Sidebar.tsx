@@ -4,17 +4,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard,
-  Briefcase,
-  GraduationCap,
-  FolderOpen,
-  Code2,
-  Award,
-  FileText,
-  Settings,
+  Briefcase,    
   Zap,
 } from "lucide-react";
 import type { ProfileUser } from "@/lib/types/profile.type";
 import { NAV, NavSection } from "@/data";
+import Link from "next/link";
 
 
 interface SidebarProps {
@@ -47,24 +42,22 @@ export function Sidebar({ active, onChange, user }: SidebarProps) {
       }}
     >
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 mb-7">
-        <div
-          className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{
-            background: "linear-gradient(135deg, #05C8C8, #0EA5E9)",
-            boxShadow: "0 0 20px rgba(5,200,200,0.3)",
-          }}
-        >
-          <Zap size={14} color="#0D1B2E" strokeWidth={2.5} />
-        </div>
-        <motion.span
-          animate={{ opacity: expanded ? 1 : 0, x: expanded ? 0 : -10 }}
-          transition={{ duration: 0.18 }}
-          className="text-sm font-bold text-white whitespace-nowrap font-display"
-        >
-          ResumeAI
-        </motion.span>
-      </div>
+  
+         <Link href="/" className="flex items-center gap-2 group px-4 mb-7">
+              <img
+                src="/logo.jpg"
+                alt="ResumeAI Logo"
+                className="w-8 h-8 rounded-full group-hover:scale-105 transition-transform"
+              />
+           {expanded && ( <span
+                className="text-xl font-bold text-white"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Resume<span className="text-[var(--teal)]">AI</span>
+              </span>
+           )}
+            </Link>
+      
 
       {/* Nav */}
       <nav className="flex-1 flex flex-col gap-0.5 px-2">

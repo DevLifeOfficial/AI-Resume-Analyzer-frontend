@@ -3,6 +3,7 @@ import { ActionMenu } from "./ActionMenu";
 import { CollectionConfig } from "../../lib/config/profile/types";
 
 interface ProfileCardProps {
+  key: string | number;
   item: Record<string, unknown>;
   index: number;
   config: CollectionConfig;
@@ -12,6 +13,7 @@ interface ProfileCardProps {
 }
 
 export function ProfileCard({
+  key,
   item,
   index,
   config,

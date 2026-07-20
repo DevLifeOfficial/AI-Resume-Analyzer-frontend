@@ -97,7 +97,7 @@ export function FormDialog({
             <DateRangePicker
               startDate={values.startDate}
               endDate={values.endDate}
-              isCurrent={values.isCurrent}
+              isCurrent={values.isCurrent as boolean | undefined}
               onStartChange={(val) => onValueChange("startDate", val)}
               onEndChange={(val) => onValueChange("endDate", val)}
               onCurrentChange={(val) => onValueChange("isCurrent", val)}

@@ -1,4 +1,4 @@
-import React from "react";
+
 import WorldImpactSection from "./Components/WorldImpactSection";
 import TrustedSection from "./Components/TrustedSelection";
 import HeroSection from "./Components/HeroSection";

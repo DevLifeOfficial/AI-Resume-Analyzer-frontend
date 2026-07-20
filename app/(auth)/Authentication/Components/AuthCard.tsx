@@ -48,7 +48,7 @@ function PasswordInput({
           placeholder={field.placeholder}
           autoComplete={field.autoComplete}
           className={cn(
-            "auth-input rounded-md pr-10 bg-white",
+            "auth-input rounded-md pr-10 bg-white text-black",
             error && "border-red-500/60 focus:border-red-500"
           )}
         />
@@ -113,7 +113,7 @@ function AuthField({
           type={field.type}
           placeholder={field.placeholder}
           autoComplete={field.autoComplete}
-          className={cn("auth-input rounded-md bg-white", error && "border-red-500/60 focus:border-red-500")}
+          className={cn("auth-input rounded-md bg-white text-black", error && "border-red-500/60 focus:border-red-500")}
         />
       )}
 

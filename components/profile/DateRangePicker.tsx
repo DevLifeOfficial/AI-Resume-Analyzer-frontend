@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 
 interface DateRangePickerProps {
-  startDate?: string; // Format: YYYY-MM
-  endDate?: string;   // Format: YYYY-MM
-  isCurrent?: boolean;
+  startDate?: string | unknown; // Format: YYYY-MM
+  endDate?: string | unknown;   // Format: YYYY-MM
+  isCurrent?: boolean | undefined;
   onStartChange: (value: string) => void;
   onEndChange: (value: string) => void;
   onCurrentChange?: (value: boolean) => void;
@@ -34,8 +34,8 @@ export function DateRangePicker({
   }, []);
 
   // Parse YYYY-MM helper
-  const parseDate = (d?: string) => {
-    if (!d) return { year: "", month: "" };
+  const parseDate = (d?: string | unknown) => {
+    if (typeof d !== "string" || !d) return { year: "", month: "" };
     const parts = d.split("-");
     return {
       year: parts[0] || "",

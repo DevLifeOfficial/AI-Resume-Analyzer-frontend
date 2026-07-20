@@ -9,7 +9,7 @@ export function ExperienceTab({ user }: { user: ProfileUser }) {
   return (
     <ProfileCollectionSection
       config={EXPERIENCE_CONFIG}
-      items={user.experience ?? []}
+      items={(user.experience ?? []) as unknown as Record<string, unknown>[]}
       icon={<Briefcase size={20} />}
     />
   );

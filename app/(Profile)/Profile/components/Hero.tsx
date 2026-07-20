@@ -42,7 +42,7 @@ export function Hero({ user }: { user: ProfileUser }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative overflow-hidden rounded-[28px]"
+      className="relative overflow-hidden rounded-[18px] "
       style={{
         background: "linear-gradient(140deg, rgba(22,34,54,0.92) 0%, rgba(14,26,46,0.96) 100%)",
         border: "1px solid rgba(255,255,255,0.06)",
@@ -58,15 +58,15 @@ export function Hero({ user }: { user: ProfileUser }) {
         }}
       />
       {/* Cover strip */}
-      <div
+      {/* <div
         className="h-24 w-full"
         style={{
           background:
             "linear-gradient(100deg, rgba(5,200,200,0.28) 0%, rgba(14,165,233,0.14) 45%, rgba(99,91,255,0.1) 100%)",
         }}
-      />
+      /> */}
 
-      <div className="relative px-7 pb-7 -mt-10 flex flex-col lg:flex-row lg:items-end gap-5">
+      <div className="relative h-45  px-7 pb-7 -mt-10 flex flex-col lg:flex-row lg:items-end gap-5">
         {/* Avatar */}
         <div className="relative flex-shrink-0">
           <div
@@ -173,7 +173,7 @@ export function Hero({ user }: { user: ProfileUser }) {
               key={label}
               whileHover={{ scale: 1.06, y: -2 }}
               whileTap={{ scale: 0.96 }}
-              className="flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-xl transition-colors"
+              className="flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-md transition-colors"
               style={{
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.06)",
@@ -193,7 +193,7 @@ export function Hero({ user }: { user: ProfileUser }) {
           <motion.button
             whileHover={{ scale: 1.06, y: -2 }}
             whileTap={{ scale: 0.96 }}
-            className="flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-xl font-semibold"
+            className="flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-md font-semibold"
             style={{
               background: "linear-gradient(135deg, rgba(5,200,200,0.18) 0%, rgba(14,165,233,0.12) 100%)",
               border: "1px solid rgba(5,200,200,0.3)",

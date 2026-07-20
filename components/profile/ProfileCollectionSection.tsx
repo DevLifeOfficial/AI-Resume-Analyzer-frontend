@@ -81,7 +81,7 @@ export function ProfileCollectionSection({
         <div className="space-y-3.5">
           {items.map((item, idx) => (
             <ProfileCard
-              key={item._id || idx}
+              key={(item as { _id?: string | number })._id ?? idx}
               item={item}
               index={idx}
               config={config}

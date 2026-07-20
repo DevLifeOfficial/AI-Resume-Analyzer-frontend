@@ -36,12 +36,12 @@ export function InsightsPanel({ user, onNavigate }: InsightsPanelProps) {
     <div className="space-y-3">
       <div className="flex items-center gap-2 pb-1">
         <Sparkles size={13} style={{ color: "#05C8C8" }} />
-        <p className="text-[10px] uppercase tracking-[0.15em] font-bold text-white/40">Profile Insights</p>
+        <p className="text-[10px] uppercase tracking-[0.15em] font-bold text-white/60">Profile Insights</p>
       </div>
 
       <GlassCard className="p-4">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-[11px] text-white/40">Completeness</p>
+          <p className="text-[11px] text-white/60">Completeness</p>
           <TrendingUp size={13} style={{ color: "#10B981" }} />
         </div>
         <div className="flex items-end gap-2 mb-3">
@@ -59,16 +59,16 @@ export function InsightsPanel({ user, onNavigate }: InsightsPanelProps) {
         </div>
       </GlassCard>
 
-      <GlassCard className="p-4 flex items-center justify-between">
-        <div>
-          <p className="text-[11px] text-white/40">Skills</p>
-          <p className="text-lg font-display font-semibold text-white">{user.skills?.length ?? 0}</p>
-        </div>
-        <div className="text-right">
-          <p className="text-[11px] text-white/40">Experience</p>
-          <p className="text-lg font-display font-semibold text-white">{user.experience?.length ?? 0}</p>
-        </div>
-      </GlassCard>
+      <div className="h-25  flex items-center justify-evenly gap-3">
+        <GlassCard className="text-center p-4 w-full">
+          <p className="text-sm text-white/60">Skills</p>
+          <p className="text-4xl font-display font-semibold text-white">{user.skills?.length ?? 0}</p>
+        </GlassCard>
+        <GlassCard className="text-center p-4 w-full">
+          <p className="text-sm text-white/60">Experience</p>
+          <p className="text-4xl font-display font-semibold text-white">{user.experience?.length ?? 0}</p>
+        </GlassCard>
+      </div>
 
       {missing.length > 0 ? (
         <GlassCard className="p-4">
