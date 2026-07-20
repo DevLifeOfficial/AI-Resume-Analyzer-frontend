@@ -2,35 +2,27 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { useAuth } from "@/lib/context/AuthContext";
 import { ErrorState } from "@/layout/errorState";
 import { ProfileSkeleton } from "@/layout/skeleton";
-import { Button } from "@/components/ui/button";
+import { Sidebar } from "./Sidebar/Sidebar";
 import {
-  CollectionSection,
-  ProfileHeader,
-  SocialLinksSection,
-  SummarySection,
-  TagSection,
-  ProfileSidebar,
-  ResumeSection,
-  SettingsSection,
+  Hero,
+  InsightsPanel,
+  OverviewTab,
+  ExperienceTab,
+  EducationTab,
+  ProjectsTab,
+  SkillsTab,
+  CertificatesTab,
+  ResumeTab,
+  SettingsTab,
 } from "./components";
-import type { ProfileSection } from "./components/ProfileSidebar";
-import { CERTIFICATES_CONFIG, EDUCATION_CONFIG, EXPERIENCE_CONFIG, PROJECTS_CONFIG } from "@/lib/config/profile.config";
-
-const STEPS = [
-  { value: "overview", label: "Overview" },
-  { value: "experience", label: "Experience" },
-  { value: "education", label: "Education" },
-  { value: "more", label: "Projects & More" },
-] as const;
+import type { NavSection } from "@/data";
 
 export default function ProfilePage() {
   const { user, loading, error } = useAuth();
-  const [activeSection, setActiveSection] = useState<ProfileSection>("profile");
-  const [currentStep, setCurrentStep] = useState(0);
+  const [active, setActive] = useState<NavSection>("overview");
 
   if (loading) return <ProfileSkeleton />;
 
@@ -46,136 +38,63 @@ export default function ProfilePage() {
     );
   }
 
-  const step = STEPS[currentStep];
-  const isLastStep = currentStep === STEPS.length - 1;
-
-  const handleSectionChange = (section: ProfileSection) => {
-    setActiveSection(section);
-    setCurrentStep(0);
+  const content: Record<NavSection, React.ReactNode> = {
+    overview: <OverviewTab user={user} onNavigate={setActive} />,
+    experience: <ExperienceTab user={user} />,
+    education: <EducationTab user={user} />,
+    projects: <ProjectsTab user={user} />,
+    skills: <SkillsTab user={user} />,
+    certificates: <CertificatesTab user={user} />,
+    resume: <ResumeTab />,
+    settings: <SettingsTab user={user} />,
   };
 
-  const goNext = () => {
-    if (isLastStep) {
-      setActiveSection("resume");
-    } else {
-      setCurrentStep((s) => s + 1);
-    }
-  };
-
-  const goBack = () => setCurrentStep((s) => Math.max(0, s - 1));
 
   return (
-    <div className="min-h-screen bg-(--backkground)">
-      <div className="max-w-[100rem] mx-auto flex flex-col md:flex-row">
-        <ProfileSidebar active={activeSection} onChange={handleSectionChange} />
+    <div className="flex h-screen overflow-hidden bg-(--background)">
+      <style>{`
+        #main-scroll::-webkit-scrollbar { width: 3px; }
+        #main-scroll::-webkit-scrollbar-track { background: transparent; }
+        #main-scroll::-webkit-scrollbar-thumb { background: rgba(5,200,200,0.18); border-radius: 2px; }
+        #main-scroll::-webkit-scrollbar-thumb:hover { background: rgba(5,200,200,0.35); }
+      `}</style>
 
-        <main className="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6 sm:space-y-8">
-          <ProfileHeader user={user} />
+      {/* Sidebar */}
+      <Sidebar active={active} onChange={setActive} user={user} />
 
-          {activeSection === "profile" && (
-            <div className="space-y-6">
-              {/* Step indicator */}
-              <div className="flex items-center gap-2 sm:gap-3">
-                {STEPS.map((s, i) => (
-                  <div key={s.value} className="flex items-center gap-2 sm:gap-3 flex-1 last:flex-none">
-                    <button onClick={() => setCurrentStep(i)} className="flex items-center gap-2 shrink-0">
-                      <span
-                        className={`flex items-center justify-center w-7 h-7 rounded-full text-xs font-medium border transition-colors ${
-                          i === currentStep
-                            ? "bg-[var(--teal)] text-[var(--navy-mid)] border-[var(--teal)]"
-                            : i < currentStep
-                            ? "bg-[rgba(5,200,200,0.15)] text-[var(--teal)] border-[rgba(5,200,200,0.3)]"
-                            : "bg-transparent text-white/30 border-white/10"
-                        }`}
-                      >
-                        {i < currentStep ? <Check className="w-3.5 h-3.5" /> : i + 1}
-                      </span>
-                      <span
-                        className={`hidden sm:inline text-sm ${
-                          i === currentStep ? "text-white font-medium" : "text-white/40"
-                        }`}
-                      >
-                        {s.label}
-                      </span>
-                    </button>
-                    {i < STEPS.length - 1 && (
-                      <span className={`h-px flex-1 ${i < currentStep ? "bg-[rgba(5,200,200,0.3)]" : "bg-white/10"}`} />
-                    )}
-                  </div>
-                ))}
-              </div>
+      {/* Main */}
+      <main id="main-scroll" className="flex-1 overflow-y-auto min-w-0">
+        <div className="max-w-[1200px] mx-auto px-6 py-6">
+          <Hero user={user} />
 
-              <AnimatePresence mode="wait" initial={false}>
+          <div className="flex gap-5 mt-5">
+            {/* Content area */}
+            <div className="flex-1 min-w-0">
+              <AnimatePresence mode="wait">
                 <motion.div
-                  key={step.value}
-                  initial={{ opacity: 0, y: 8 }}
+                  key={active}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
-                  className="space-y-6"
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {step.value === "overview" && (
-                    <>
-                      <SummarySection profileSummary={user.profileSummary} />
-
-                      <div className="grid gap-6 lg:grid-cols-2 items-start">
-                        <TagSection
-                          title="Skills"
-                          description="Used to match your resume against job descriptions."
-                          emptyMessage="No skills added yet."
-                          placeholder="e.g. Python, SQL, Figma"
-                          values={user.skills ?? []}
-                          fieldKey="skills"
-                          maxTags={50}
-                        />
-                        <TagSection
-                          title="Interests"
-                          emptyMessage="No interests added yet."
-                          placeholder="e.g. Open source, Mentorship"
-                          values={user.interests ?? []}
-                          fieldKey="interests"
-                          maxTags={30}
-                        />
-                      </div>
-
-                      <SocialLinksSection socialLinks={user.socialLinks} />
-                    </>
-                  )}
-
-                  {step.value === "experience" && (
-                    <CollectionSection config={EXPERIENCE_CONFIG} items={user.experience ?? []} />
-                  )}
-
-                  {step.value === "education" && (
-                    <CollectionSection config={EDUCATION_CONFIG} items={user.education ?? []} />
-                  )}
-
-                  {step.value === "more" && (
-                    <>
-                      <CollectionSection config={PROJECTS_CONFIG} items={user.projects ?? []} />
-                      <CollectionSection config={CERTIFICATES_CONFIG} items={user.certificates ?? []} />
-                    </>
-                  )}
+                  {content[active]}
                 </motion.div>
               </AnimatePresence>
+            </div>
 
-              {/* Step navigation */}
-              <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/5">
-                <Button variant="ghost" onClick={goBack} disabled={currentStep === 0} className="gap-1.5">
-                  <ArrowLeft className="w-3.5 h-3.5" /> Back
-                </Button>
-                <Button onClick={goNext} className="gap-1.5">
-                  {isLastStep ? "Done" : "Save & Continue"}
-                  {!isLastStep && <ArrowRight className="w-3.5 h-3.5" />}
-                </Button>
+            {/* Insights panel */}
+            <div className="hidden xl:block w-72 flex-shrink-0 sticky top-6 self-start max-h-[calc(100vh-3rem)] overflow-y-auto pb-6">
+              <style>{`
+                .insights-scroll::-webkit-scrollbar { display: none; }
+              `}</style>
+              <div className="insights-scroll">
+                <InsightsPanel user={user} onNavigate={setActive} />
               </div>
             </div>
-          )}
-
-          {activeSection === "resume" && <ResumeSection />}
-          {activeSection === "settings" && <SettingsSection />}
-        </main>
-      </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

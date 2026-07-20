@@ -59,14 +59,14 @@ export const PROFILE_FIELDS = gql`
 
 // ── User
 export const GET_CURRENT_USER = gql`
+  ${PROFILE_FIELDS}
   query GetCurrentUser {
     getCurrentUser {
-      _id name email avatarUrl role plan
-      usage { totalScans monthlyScans dailyScans lastScanDate }
-      settings { darkMode notificationOnAnalysisComplete emailNotifications language }
+      ...ProfileFields
     }
   }
 `;
+
 
 
 export const UPDATE_PROFILE = gql`

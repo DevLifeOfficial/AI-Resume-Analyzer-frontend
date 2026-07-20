@@ -6,64 +6,67 @@
 
 @layer base {
   :root {
-    /* Brand palette — deep navy + electric teal + warm off-white */
-    --background: 220 20% 97%;
-    --foreground: 222 47% 8%;
+    /* Brand palette — deep navy + electric teal + warm off-white.
+       These are the exact Figma colors (Deep Navy #0D1B2E, Navy Mid #162236,
+       Navy Light #1E2F47, Teal #05C8C8, Cream #F5F4F0) converted to HSL, set
+       as the DEFAULT theme rather than only under .dark — this app doesn't
+       toggle a .dark class anywhere, so the old light-mode :root values were
+       what was actually rendering. */
+    --background: 215 56% 12%;     /* Deep Navy #0D1B2E */
+    --foreground: 48 20% 95%;      /* Cream #F5F4F0 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 8%;
+    --card: 218 42% 15%;           /* Navy Mid #162236 */
+    --card-foreground: 48 20% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 8%;
+    --popover: 215 41% 20%;        /* Navy Light #1E2F47 */
+    --popover-foreground: 48 20% 95%;
 
-    --primary: 187 96% 40%;        /* electric teal */
-    --primary-foreground: 222 47% 8%;
+    --primary: 180 95% 40%;        /* electric teal #05C8C8 */
+    --primary-foreground: 215 56% 12%;
 
-    /* Secondary softened: was solid navy, read as a second primary button.
-       Now a light teal-tinted neutral so it visibly recedes behind --primary. */
-    --secondary: 187 30% 94%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary: was a light teal tint meant for a light background — wrong
+       on dark navy. Now a navy-family neutral so it recedes behind --primary
+       instead of turning into a pale, out-of-place chip. */
+    --secondary: 218 30% 20%;
+    --secondary-foreground: 48 20% 95%;
 
-    --muted: 220 14% 92%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 60%;
 
-    --accent: 187 96% 40%;
-    --accent-foreground: 222 47% 8%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 48 20% 95%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
-    --ring: 187 96% 40%;
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 180 95% 40%;
 
     --radius: 0.625rem;
 
     /* Chart + sidebar tokens (merged in, no longer duplicated below) */
-    --chart-1: 187 96% 40%;
-    --chart-2: 222 47% 11%;
+    --chart-1: 180 95% 40%;
+    --chart-2: 48 20% 95%;
     --chart-3: 40 90% 55%;
     --chart-4: 210 40% 60%;
     --chart-5: 222 20% 70%;
 
-    --sidebar: 222 47% 11%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 187 96% 40%;
-    --sidebar-primary-foreground: 222 47% 8%;
-    --sidebar-accent: 187 96% 40%;
-    --sidebar-accent-foreground: 222 47% 8%;
+    --sidebar: 215 60% 8%;
+    --sidebar-foreground: 48 20% 95%;
+    --sidebar-primary: 180 95% 40%;
+    --sidebar-primary-foreground: 215 56% 12%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 48 20% 95%;
     --sidebar-border: 217 33% 20%;
-    --sidebar-ring: 187 96% 40%;
+    --sidebar-ring: 180 95% 40%;
 
-    /* Custom tokens */
+    /* Custom tokens — exact Figma hex, unchanged, already correct */
     --teal: #05c8c8;
     --teal-dim: #048a8a;
     --navy: #0d1b2e;
     --navy-mid: #162236;
     --navy-light: #1e2f47;
-
-    /* Cream is now the single off-white — background aliases it so there's
-       only one "warm neutral" in the system instead of two competing ones. */
     --cream: #f5f4f0;
 
     /* Gold: reserved for highlight/rank/featured accents (e.g. "top match" tag).
@@ -77,45 +80,48 @@
     --font-body: 'DM Sans', sans-serif;
 
     --shadow-glow: 0 0 40px rgba(5, 200, 200, 0.15);
-    --shadow-card: 0 4px 24px rgba(13, 27, 46, 0.08);
-    --shadow-card-hover: 0 8px 40px rgba(13, 27, 46, 0.14);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.28);
+    --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.38);
   }
 
+  /* .dark now mirrors :root — kept in case a toggle is wired up later, but
+     the app is single-theme (always the Figma navy look) so there's nothing
+     to switch to. If a real light mode is ever wanted, this is where it'd go. */
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 96%;
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 96%;
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 96%;
-    --primary: 187 96% 40%;
-    --primary-foreground: 222 47% 8%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --background: 215 56% 12%;
+    --foreground: 48 20% 95%;
+    --card: 218 42% 15%;
+    --card-foreground: 48 20% 95%;
+    --popover: 215 41% 20%;
+    --popover-foreground: 48 20% 95%;
+    --primary: 180 95% 40%;
+    --primary-foreground: 215 56% 12%;
+    --secondary: 218 30% 20%;
+    --secondary-foreground: 48 20% 95%;
     --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 55%;
+    --muted-foreground: 215 20% 60%;
     --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
+    --accent-foreground: 48 20% 95%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 20%;
     --input: 217 33% 17%;
-    --ring: 187 96% 40%;
+    --ring: 180 95% 40%;
 
-    --chart-1: 187 96% 40%;
-    --chart-2: 210 40% 80%;
-    --chart-3: 40 90% 60%;
-    --chart-4: 210 40% 55%;
-    --chart-5: 222 20% 45%;
+    --chart-1: 180 95% 40%;
+    --chart-2: 48 20% 95%;
+    --chart-3: 40 90% 55%;
+    --chart-4: 210 40% 60%;
+    --chart-5: 222 20% 70%;
 
-    --sidebar: 222 47% 5%;
-    --sidebar-foreground: 210 40% 96%;
-    --sidebar-primary: 187 96% 40%;
-    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar: 215 60% 8%;
+    --sidebar-foreground: 48 20% 95%;
+    --sidebar-primary: 180 95% 40%;
+    --sidebar-primary-foreground: 215 56% 12%;
     --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 187 96% 40%;
+    --sidebar-accent-foreground: 48 20% 95%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 180 95% 40%;
   }
   * {
     @apply border-border outline-ring/50;
@@ -167,17 +173,12 @@
 
   /* ── Glass card ── */
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(22, 34, 54, 0.7);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(5, 200, 200, 0.12);
+    border: 1px solid rgba(5, 200, 200, 0.15);
     box-shadow: var(--shadow-card);
     @apply rounded-2xl;
-  }
-
-  .dark .glass-card {
-    background: rgba(22, 34, 54, 0.7);
-    border: 1px solid rgba(5, 200, 200, 0.15);
   }
 
   /* ── Teal glow button ── */
@@ -347,37 +348,37 @@
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar: hsl(var(--sidebar));
+  --color-chart-5: hsl(var(--chart-5));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-ring: hsl(var(--ring));
+  --color-input: hsl(var(--input));
+  --color-border: hsl(var(--border));
+  --color-destructive: hsl(var(--destructive));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card: hsl(var(--card));
+  --color-foreground: hsl(var(--foreground));
+  --color-background: hsl(var(--background));
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);

@@ -1,6 +1,13 @@
 // ─── Central data store 
 
-import { Sparkles, Target, Users } from "lucide-react";
+import { FileTextIcon } from "@radix-ui/react-icons";
+import { Briefcase, LayoutDashboard, Sparkles, Target, Users,  
+  GraduationCap,
+  FolderOpen,
+  Code2,
+  Award,
+  Settings,
+  FileText, } from "lucide-react";
 
 export const SITE = {
   name: "ResumeAI",
@@ -18,6 +25,36 @@ export const NAV_LINKS = [
   { label: "Pricing", href: "#pricing" },
   { label: "Testimonials", href: "#testimonials" },
 ];
+
+export type NavSection =
+  | "overview"
+  | "experience"
+  | "education"
+  | "projects"
+  | "skills"
+  | "certificates"
+  | "resume"
+  | "settings";
+
+export const NAV: { key: NavSection; label: string; Icon: React.ElementType }[] = [
+  { key: "overview", label: "Overview", Icon: LayoutDashboard },
+  { key: "experience", label: "Experience", Icon: Briefcase },
+  { key: "education", label: "Education", Icon: GraduationCap },
+  { key: "projects", label: "Projects", Icon: FolderOpen },
+  { key: "skills", label: "Skills", Icon: Code2 },
+  { key: "certificates", label: "Certificates", Icon: Award },
+  { key: "resume", label: "Resume", Icon: FileText },
+  { key: "settings", label: "Settings", Icon: Settings },
+];
+
+
+export const CATEGORY_COLORS: Record<string, string> = {
+  Frontend: "#05C8C8",
+  Design: "#8B5CF6",
+  Backend: "#10B981",
+  DevOps: "#F59E0B",
+  AI: "#EF4444",
+};
 
 // ─── Hero
 export const HERO = {
